@@ -23,7 +23,7 @@ resource "aws_internet_gateway" "igw" {
   tags = var.tags
 }
 resource "aws_route_table" "public-rt" {
-  vpc_id = aws_vpc.main.id
+  vpc_id = aws_vpc.public.id
 
   route {
     cidr_block = "0.0.0.0/0"
@@ -46,7 +46,7 @@ resource "aws_eip" "auto-eip" {
      depends_on = [aws_internet_gateway.igw]
    }
 resource "aws_route_table" "private-rt" {
-  vpc_id = aws_vpc.main.id
+  vpc_id = aws_vpc.public.id
 
   route {
     cidr_block = "0.0.0.0/0"
