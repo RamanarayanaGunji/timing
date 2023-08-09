@@ -1,4 +1,4 @@
- resource "aws_vpc" "main" {
+ resource "aws_vpc" "public" {
   cidr_block       = var.cidr
   instance_tenancy = "default"
 
