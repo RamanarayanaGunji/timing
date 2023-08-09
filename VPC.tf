@@ -2,25 +2,33 @@
   cidr_block       = var.cidr
   instance_tenancy = "default"
 
-  tags = var.tags
+  tags = merge(var.tags{
+          Name = "timing-VPC"
+          })
 
 }
 resource "aws_subnet" "public" {
   vpc_id     = aws_vpc.public.id
   cidr_block = var.public_subnet_cidr
 
-  tags = var.tags
+  tags = merge(var.tags{
+          Name = "timing-public"
+          })
 }
 resource "aws_subnet" "private" {
   vpc_id     = aws_vpc.public.id
   cidr_block = "10.0.2.0/24"
 
-  tags = var.tags
+  tags = merge(var.tags{
+           Name = "timing-private"
+           })
 }
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.public.id
 
-  tags = var.tags
+  tags = merge(var.tags{
+             Name = "timing-igw"
+             })
 }
 resource "aws_route_table" "public-rt" {
   vpc_id = aws_vpc.public.id
