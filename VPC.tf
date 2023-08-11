@@ -17,7 +17,7 @@ resource "aws_subnet" "public" {
 }
 resource "aws_subnet" "private" {
   vpc_id     = aws_vpc.public.id
-  cidr_block = "10.0.2.0/24"
+  cidr_block = var.private_subnet_cidr
 
   tags = merge(var.tags,{
            Name = "timing-subnet-private"
@@ -34,7 +34,7 @@ resource "aws_route_table" "public-rt" {
   vpc_id = aws_vpc.public.id
 
   route {
-    cidr_block = "0.0.0.0/0"
+    cidr_block = var.internet_cidr
     gateway_id = aws_internet_gateway.igw.id
   }
 
