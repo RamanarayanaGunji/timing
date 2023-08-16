@@ -47,7 +47,7 @@ resource "aws_route_table" "public-rt" {
 resource "aws_eip" "auto-eip" {
 
 }
-/*  resource "aws_nat_gateway" "nat" {
+resource "aws_nat_gateway" "nat" {
  allocation_id = aws_eip.auto-eip.id
  subnet_id     = aws_subnet.private.id
   tags = var.tags
@@ -63,7 +63,7 @@ resource "aws_route_table" "private-rt" {
     gateway_id = aws_nat_gateway.nat.id
   }
   tags = var.tags
-} */
+}
 resource "aws_route_table_association" "public-table-association" {
   subnet_id      = aws_subnet.public.id
   route_table_id = aws_route_table.public-rt.id
